@@ -8,9 +8,9 @@
 - Calculate average, highest & lowest scores
 
 ### 2️⃣ Hotel Reservation System
-- Console-based Java application
+- consoled-based Java application
 - Room booking & cancellation
-- File I/O for data storage
+- Database for data storage
 - Payment simulation
 
 ## 🔧 Technologies Used
