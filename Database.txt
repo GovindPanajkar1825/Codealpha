@@ -1,0 +1,53 @@
+/* ================================
+   HOTEL RESERVATION SYSTEM DATABASE
+   ================================ */
+
+/* ----- DROP DATABASE IF EXISTS (OPTIONAL) ----- */
+DROP DATABASE IF EXISTS hotel_db;
+
+/* ----- CREATE DATABASE ----- */
+CREATE DATABASE hotel_db;
+USE hotel_db;
+
+/* ----- CREATE ROOMS TABLE ----- */
+CREATE TABLE rooms (
+    room_number INT PRIMARY KEY,
+    category VARCHAR(20) NOT NULL,
+    price DOUBLE NOT NULL,
+    is_available BOOLEAN DEFAULT TRUE
+);
+
+/* ----- CREATE RESERVATIONS TABLE ----- */
+CREATE TABLE reservations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(50) NOT NULL,
+    room_number INT NOT NULL,
+    days INT NOT NULL,
+    total_amount DOUBLE NOT NULL,
+    FOREIGN KEY (room_number)
+        REFERENCES rooms(room_number)
+        ON DELETE CASCADE
+);
+
+/* ----- INSERT SAMPLE ROOM DATA ----- */
+INSERT INTO rooms (room_number, category, price, is_available) VALUES
+(101, 'Standard', 2000, TRUE),
+(102, 'Standard', 2000, TRUE),
+(201, 'Deluxe', 3500, TRUE),
+(202, 'Deluxe', 3500, TRUE),
+(301, 'Suite', 5000, TRUE);
+
+/* ----- SAMPLE QUERIES (OPTIONAL TESTING) ----- */
+
+/* View all rooms */
+SELECT * FROM rooms;
+
+/* View available rooms */
+SELECT * FROM rooms WHERE is_available = TRUE;
+
+/* Search rooms by category */
+SELECT * FROM rooms
+WHERE category = 'Deluxe' AND is_available = TRUE;
+
+/* View all reservations */
+SELECT * FROM reservations;
