@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int marks;
+
+    Student(String name, int marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+}
+
+public class StudentGradeTracker {
+
+    static ArrayList<Student> students = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        while (true) {
+            System.out.println("\n--- STUDENT GRADE TRACKER ---");
+            System.out.println("1. Add Student");
+            System.out.println("2. View Report");
+            System.out.println("3. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1 -> addStudent();
+                case 2 -> showReport();
+                case 3 -> {
+                    System.out.println("Thank you!");
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice!");
+            }
+        }
+    }
+
+    static void addStudent() {
+        System.out.print("Enter student name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter marks: ");
+        int marks = sc.nextInt();
+
+        students.add(new Student(name, marks));
+        System.out.println("Student added successfully!");
+    }
+
+    static void showReport() {
+        if (students.isEmpty()) {
+            System.out.println("No student data available.");
+            return;
+        }
+
+        int total = 0;
+        int highest = Integer.MIN_VALUE;
+        int lowest = Integer.MAX_VALUE;
+
+        System.out.println("\n--- STUDENT REPORT ---");
+        for (Student s : students) {
+            System.out.println(s.name + " : " + s.marks);
+            total += s.marks;
+            highest = Math.max(highest, s.marks);
+            lowest = Math.min(lowest, s.marks);
+        }
+
+        double average = (double) total / students.size();
+
+        System.out.println("\nAverage Marks: " + average);
+        System.out.println("Highest Marks: " + highest);
+        System.out.println("Lowest Marks: " + lowest);
+    }
+}
